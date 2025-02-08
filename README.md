@@ -21,8 +21,8 @@ Avant de commencer, assure-toi d’avoir installé :
 
 Utilise la commande suivante pour cloner le projet sur ta machine :
 
-sh
 git clone https://github.com/ton-utilisateur/ton-repo.git
+
 cd ton-repo
 
 
@@ -32,13 +32,11 @@ cd ton-repo
 
 Installe les dépendances PHP avec Composer :
 
-sh
 composer install
 
 
 Si ton projet utilise des paquets npm (ex. Tailwind, Vue.js, etc.), installe-les avec :
 
-sh
 npm install
 
 
@@ -48,13 +46,12 @@ npm install
 
 Copie le fichier .env.example en .env et configure tes variables d’environnement :
 
-sh
 cp .env.example .env
 
 
 Génère la clé de l’application :
 
-sh
+
 php artisan key:generate
 
 
@@ -75,7 +72,7 @@ DB_PASSWORD=ton_mot_de_passe
 
 Puis exécute :
 
-sh
+
 php artisan migrate --seed
 
 
@@ -87,7 +84,7 @@ Si ton projet utilise des données de test, ajoute --seed pour remplir la base.
 
 Démarre le serveur Laravel :
 
-sh
+
 php artisan serve
 
 
@@ -102,19 +99,19 @@ http://127.0.0.1:8000
 ## 🛠 Commandes utiles
 
 - *Créer un modèle avec une migration* :
-  sh
+
   php artisan make:model Nom -m
   
 - *Créer un contrôleur* :
-  sh
+
   php artisan make:controller NomController
   
 - *Créer une factory* :
-  sh
+  
   php artisan make:factory NomFactory --model=Nom
   
 - *Créer un seeder* :
-  sh
+  
   php artisan make:seeder NomSeeder
   
 
