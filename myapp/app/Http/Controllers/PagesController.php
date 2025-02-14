@@ -33,9 +33,21 @@ class PagesController extends Controller
         return view('tp3/produit',compact('p','n'));
     }
 
-    function liste(){
-        $produits = Product::all();
-        return view('/tp4/liste',compact('produits'));
+    function liste( Request $req){
+        // Récupérer la valeur de la recherche
+        $recherche = $req->input('searchs');
+
+        // Vérifier si la recherche est définie
+        if ($recherche) {
+            // Recherche les produits où le nom correspond à la recherche
+            $produits = Product::where("name", "like", "%$recherche%")->get();
+        } else {
+            // Si aucune recherche, obtenir tous les produits
+            $produits = Product::all();
+        }
+
+        // Retourner la vue avec les produits trouvés
+        return view('tp4.liste', compact('produits'));
     }
 
 
@@ -64,7 +76,7 @@ class PagesController extends Controller
         $n=$r->get("nn");
         $prix=$r->get("pp");
         $id=$r->get("ii");
-        
+
 
         $product =Product::find($id);
         $product->update([

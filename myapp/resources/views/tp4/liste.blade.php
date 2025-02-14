@@ -3,7 +3,11 @@
     @session('success')
         <div class="alert alert-success">{!! session ('success')!!}</div>
     @endsession
-<table border="1">
+    <form class="form-horizontal" action="/produit" method="get">
+        <input type="text" name="searchs"  value="{{ request('searchs') }}">
+        <input type="submit">
+    </form>
+    <table border="1">
     <tr>
         <th>id</th>
         <th>name</th>
