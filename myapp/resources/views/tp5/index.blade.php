@@ -1,5 +1,5 @@
 
-@extends ('tp5/layot');
+@extends ('tp5/layout')
 @section('content')
 
 <body class="container mt-4">
@@ -21,10 +21,15 @@
                 <tr>
                     <td>{{ $m->id }}</td>
                     <td>{{ $m->name }}</td>
-                    <td>{{ $m->desc }}</td>
+                    <td>{{ $m->description }}</td>
                     <td>
                         <a href="/marque/{{$m->id}}/edit" class="btn btn-warning btn-sm">Modifier</a>
-                        <a href="/marque/{{$m->id}}" class="btn btn-danger btn-sm">Supprimer</a>
+                        <form action="/marque/{{ $m->id }}" method="post" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                        </form>
+
                     </td>
                 </tr>
             @endforeach
@@ -35,5 +40,6 @@
     <div class="d-flex justify-content-center">
         {{$marqs->links("pagination::bootstrap-4")}}
     </div>
+
 </body>
 

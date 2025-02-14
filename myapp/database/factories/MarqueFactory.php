@@ -21,7 +21,7 @@ class MarqueFactory extends Factory
     {
         return [
             'name'=> $this->faker->unique()->name(),
-            'desc'=>$this->faker->sentence(),    // faker() = $this->faker
+            'description'=>$this->faker->sentence(),    // faker() = $this->faker
         ];
     }
 }

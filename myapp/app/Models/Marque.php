@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Marque extends Model
 {
     use HasFactory;
-    protected $fillable =["id","name","desc"];
+    protected $fillable =["name","description"];
 }

@@ -30,69 +30,66 @@ class MarquesController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $nom = $request->get('nn');
-        $desc = $request->get('dd');
+{
+    $request->validate([
+        "nn" => "required|string|unique:marques,name",
+        "dd" => "nullable|string"
+    ]);
 
+    Marque::create([
+        "name" => $request->nn,
+        "description" => $request->dd
+    ]);
 
-        Marque::create([
-            "name" => $nom,
-            "desc" => $desc,
+    return redirect()->route('marque.index')->with('success', 'Marque créée avec succès.');
+}
 
-        ]);
-
-        return redirect("/marque");
-    }
 
     /**
      * Display the specified resource.
      */
-    public function show( $id)
+    public function show( Marque $marque)
     {
-        //
+        return view('tp5.show', compact('marque'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Marque $marque)
     {
-        $marqs = Marque::find($id);
+        return view('tp5.edit', compact('marque'));
 
-        if ($marqs == null) return redirect('/marque');
-
-        return view("tp5.edit", compact('marqs'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
-    {
-        $nom = $request->get('nn');
-        $desc = $request->get('desc');
-        $id = $request->get('ii');
+    public function update(Request $request, Marque $marque)
+{
+    $request->validate([
+        "nn" => "required|string|unique:marques,name," . $marque->id,
+        "desc" => "nullable|string"
+    ]);
 
-        $marqs = Marque::find($id);
-        $marqs->update([
-            "name" => $nom,
-            "desc" => $desc,
-        ]);
+    $marque->update([
+        "name" => $request->nn,
+        "description" => $request->desc
+    ]);
 
-        return redirect("tp5.index ");
-    }
+    return redirect()->route('marque.index')->with('success', 'Marque mise à jour.');
+
+}
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy( $id)
+
+    public function destroy($id)
     {
-        $marqs = Marque::find($id);
-        if ($marqs == null)
-        return "aucun marque";
+        $marque = Marque::find($id);
+        $marque->delete();
 
-        $marqs->delete();
-
-        return redirect("/marque");
+        return redirect('/marque')->with('success', 'Marque deleted successfully!');
     }
 }
