@@ -6,7 +6,6 @@
     <div class="card">
         <h1>Liste des Produits</h1>
         <a href="{{ route('products.create') }}" class="button">Nouveau produit</a>
-
         <table>
             <thead>
                 <tr>
