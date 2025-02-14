@@ -1,25 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Modifier Produit</title>
-</head>
-<body>
-    <h1>Modifier Produit</h1>
+@extends('layouts.layout')
 
-    <form method="post" action="/enregister " >
-        @csrf
-        <fieldset>
-            <legend>Formulaire de modification</legend>
-            <input type="text" name="ii" value="{{ $p->id }}" hidden>
-            <label for="">Nom :</label>
-            <input type="text" name="nn" value="{{ $p->name }}"><br><br><br>
-            <label for="">Prix :</label>
-            <input type="number" name="pp" value="{{ $p->prix }}"><br><br><br>
-            <input type="submit" value="Engristre">
-        </fieldset>
-    </form>
-</body>
-</html>
+@section('title', 'Modifier le Produit')
+
+@section('content')
+    <div class="card">
+        <h1>Modifier le produit {{ $product->title }}</h1>
+
+        <form action="{{ route('products.update', $product->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+
+            <label>Titre :</label>
+            <input type="text" name="title" value="{{ $product->title }}" required>
+
+            <label>Prix :</label>
+            <input type="number" name="price" value="{{ $product->price }}" required>
+
+            <label>Description :</label>
+            <textarea name="description">{{ $product->description }}</textarea>
+
+            <label>Discount :</label>
+            <input type="number" name="discount" value="{{ $product->discount }}">
+
+            <input type="submit" value="Enregistrer">
+        </form>
+    </div>
+@endsection

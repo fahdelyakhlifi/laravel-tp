@@ -1,4 +1,3 @@
-
 @extends ('tp5/layout')
 @section('content')
 
@@ -7,9 +6,16 @@
 
     @if ($marque)
         <ul class="list-group">
-            <li class="list-group-item"><strong>ID :</strong> {{ $marque->id }}</li>
-            <li class="list-group-item"><strong>Nom :</strong> {{ $marque->name }}</li>
-            <li class="list-group-item"><strong>Description :</strong> {{ $marque->description }}</li>
+            <li class="list-group-item">
+                <strong>ID :</strong> {{ $marque->id }}
+            </li>
+            <li class="list-group-item">
+                <strong>Nom :</strong> {{ $marque->name }}
+            </li>
+            <li class="list-group-item">
+                <strong>Description :</strong> 
+                {{ $marque->description }}
+            </li>
         </ul>
     @else
         <div class="alert alert-warning text-center">Aucune Marque trouvée</div>
@@ -19,5 +25,3 @@
         <a href="{{ route('marque.index') }}" class="btn btn-secondary">Retour à la liste</a>
     </div>
 </div>
-
-

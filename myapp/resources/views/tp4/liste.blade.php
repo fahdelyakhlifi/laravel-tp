@@ -1,33 +1,45 @@
-@extends ('/tp1/default')
+@extends('layouts.layout')
+
+@section('title', 'Liste des Produits')
+
 @section('content')
-    @session('success')
-        <div class="alert alert-success">{!! session ('success')!!}</div>
-    @endsession
-<table border="1">
-    <tr>
-        <th>id</th>
-        <th>name</th>
-        <th>prix</th>
-        <th>description</th>
-        <th>discount</th>
-    </tr>
-    @foreach($produits as $p)
-    <tr>
-        <td>{{$p->id}}</td>
-        <td>{{$p->name}}</td>
-        <td>{{$p->prix*$p->discount/100}}({{$p->prix}})</td>
-        <td>
-            {{$p->description}}
-        </td>
-        <td>@if($p->discount>50)
-            <span style="color: brown">{{$p->discount}}</span>
-            @else
-            <span style="color: green">{{$p->discount}}</span>
-            @endif
+    <div class="card">
+        <h1>Liste des Produits</h1>
+        <a href="{{ route('products.create') }}" class="button">Nouveau produit</a>
 
-        </td>
-    </tr>
-    @endforeach
-</table>
-
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($products as $pr)
+                    <tr>
+                        <td>{{ $pr->id }}</td>
+                        <td>{{ $pr->title }} {!! $pr->discountSpan !!}</td>
+                        <td>{{ $pr->newPrice }} dh
+                            @if ($pr->discount > 0)
+                                <span style="text-decoration: line-through">{{ $pr->price }} dh</span>
+                            @endif
+                        </td>
+                        <td>{{ $pr->description }}</td>
+                        <td class="actions">
+                            <a href="{{ route('products.edit', $pr->id) }}" class="button">Modifier</a>
+                            <a href="{{ route('products.show', $pr->id) }}" class="button">Détails</a>
+                            <form action="{{ route('products.destroy', $pr->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <input type="submit" value="Supprimer" class="button">
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 @endsection

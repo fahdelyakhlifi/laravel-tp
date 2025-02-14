@@ -1,30 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+@extends('layouts.layout')
 
+@section('title', 'Ajouter un Produit')
 
-    <form method="POST" action='/inserer' >
-        @csrf
-        <fieldset>
-            <legend>formulaire d'ajout</legend>
+@section('content')
+    <div class="card">
+        <h1>Ajouter un Nouveau Produit</h1>
 
-            <label for="">Nom :</label>
-            <input type="text" name="nn"><br><br><br>
-            <label for="">Prix :</label>
-            <input type="number" name="pp"><br><br><br>
-            <label for="">Description :</label>
-            <textarea name="des" rows="4" cols="50"></textarea><br><br><br>
-            <label for="">discount:</label>
-            <input type="number" name="disco"><br><br><br>
-            <input type="submit" value="envoyer">
+        <form action="{{ route('products.store') }}" method="POST">
+            @csrf
+            <label>Titre :</label>
+            <input type="text" name="title" required>
 
-        </fieldset>
-    </form>
-</body>
-</html>
+            <label>Prix :</label>
+            <input type="number" step="0.01" name="price" required>
+
+            <label>Description :</label>
+            <textarea name="description"></textarea>
+
+            <label>Discount :</label>
+            <input type="number" step="0.01" name="discount">
+
+            <input type="submit" value="Envoyer">
+        </form>
+    </div>
+@endsection

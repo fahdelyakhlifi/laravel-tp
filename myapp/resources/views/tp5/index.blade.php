@@ -1,4 +1,3 @@
-
 @extends ('tp5/layout')
 @section('content')
 
@@ -42,4 +41,3 @@
     </div>
 
 </body>
-
