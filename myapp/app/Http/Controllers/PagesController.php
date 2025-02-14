@@ -69,6 +69,11 @@ class PagesController extends Controller
         $p = Product::find($id);
         return view('tp4.edit', compact('p'));
     }
+    function enregister(Request $r){
+        $n=$r->get("nn");
+        $prix=$r->get("pp");
+        $id=$r->get("ii");
+
     function enregister(Request $r)
     {
         $n = $r->get("nn");

@@ -10,11 +10,18 @@ class MarquesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index( Request $req)
     {
-        //$marqs = Marque::all();
-        $marqs = Marque::orderBy('id', 'asc')->paginate(20); // Tri par ID croissant
+        $recherche= $req->input('search');
+        if($recherche){
+            $marqs=Marque::where("name","like","%$recherche%")->paginate(10);
+        }
+
+        else {$marqs = Marque::paginate(10);}
+        //$marqs = Marque::orderBy('id', 'asc')->paginate(20); // Tri par ID croissant
         return view("tp5.index",compact('marqs'));
+
+
 
     }
 
@@ -33,12 +40,12 @@ class MarquesController extends Controller
 {
     $request->validate([
         "nn" => "required|string|unique:marques,name",
-        "dd" => "nullable|string"
+        "desc" => "nullable|string"
     ]);
 
     Marque::create([
         "name" => $request->nn,
-        "description" => $request->dd
+        "description" => $request->desc
     ]);
 
     return redirect()->route('marque.index')->with('success', 'Marque créée avec succès.');
