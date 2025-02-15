@@ -1,0 +1,25 @@
+# Dépendances Node et PHP
+node_modules/
+vendor/
+
+# Fichiers de configuration
+.env
+.env.local
+.env.*.local
+
+# Build & Cache
+storage/
+bootstrap/cache/
+public/storage/
+public/build/
+npm-debug.log
+yarn-error.log
+*.log
+
+# Fichiers générés
+package-lock.json
+composer.lock
+
+# PostCSS
+myapp/postcss.config.js
+myapp/postcss.config.cjs

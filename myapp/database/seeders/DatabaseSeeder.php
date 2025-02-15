@@ -19,5 +19,9 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        //tp4 -- products
+        $this->call(ProductSeeder::class);
+
     }
 }
