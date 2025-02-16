@@ -97,3 +97,4 @@ class PagesController extends Controller
         return redirect('/produit')->with('success', 'le produit <b>' . $product->name . '</b> a ete supprimer ');
     }
 }
+}
