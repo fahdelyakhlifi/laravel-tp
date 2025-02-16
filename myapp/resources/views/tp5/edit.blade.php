@@ -1,4 +1,4 @@
-@extends ('tp5/layout')
+@extends ('layout')
 @section('content')
 
 <div class="container mt-4 p-4 border rounded shadow bg-light">

@@ -1,4 +1,4 @@
-@extends ('tp5/layout')
+@extends ('layout')
 @section('content')
 
 
