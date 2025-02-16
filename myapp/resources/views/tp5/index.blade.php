@@ -4,7 +4,7 @@
 
 
     <div class="card shadow-lg p-4">
-        <h1 class="text-center text-primary mb-4">Liste des Marques</h1>
+        <h1 class="text-center text-dark mb-4">Liste des Marques</h1>
 
         <!-- Formulaire de recherche -->
         <form class="d-flex justify-content-center mb-4" action="/marque" method="get">
@@ -14,7 +14,7 @@
 
         <!-- Bouton Ajouter une marque -->
         <div class="text-end mb-3">
-            <a href="marque/create" class="btn btn-success">
+            <a href="marque/create" class="btn btn-primary">
                 <i class="fas fa-plus"></i> Ajouter une marque
             </a>
         </div>
@@ -37,7 +37,7 @@
                             <td>{{ $m->name }}</td>
                             <td>{{ $m->description }}</td>
                             <td class="text-center">
-                                <a href="/marque/{{$m->id}}/edit" class="btn btn-warning btn-sm">
+                                <a href="/marque/{{$m->id}}/edit" class="btn btn-success btn-sm">
                                     <i class="fas fa-edit"></i> Modifier
                                 </a>
                                 <form action="/marque/{{ $m->id }}" method="post" style="display:inline;">

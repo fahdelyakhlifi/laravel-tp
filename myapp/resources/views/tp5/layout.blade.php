@@ -9,7 +9,7 @@
     <title>Document</title>
 </head>
 <body class="container mt-5">
-    @yield('content');
+    @yield('content')
 </body>
 </html>
 <head>
