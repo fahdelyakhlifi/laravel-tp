@@ -8,7 +8,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-100 flex flex-col min-h-screen">
     <!-- Navbar -->
     <nav class="bg-sky-700 p-4 text-white">
         <div class="container mx-auto flex justify-between items-center">
@@ -21,12 +21,12 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="container mx-auto p-4">
+    <main class="container mx-auto p-4 flex-1">
         @yield('content')
     </main>
 
     <!-- Footer -->
-    <footer class="bg-sky-700 p-4 text-white mt-8">
+    <footer class="bg-sky-700 p-4 text-white mt-auto">
         <div class="container mx-auto text-center">
             &copy; {{ date('Y') }} My App. All rights reserved.
         </div>
