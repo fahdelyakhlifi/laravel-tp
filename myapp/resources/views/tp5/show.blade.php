@@ -1,4 +1,4 @@
-@extends ('tp5/layout')
+@extends ('layout')
 @section('content')
 
 <div class="container mt-4 p-4 border rounded shadow bg-light">
@@ -13,7 +13,7 @@
                 <strong>Nom :</strong> {{ $marque->name }}
             </li>
             <li class="list-group-item">
-                <strong>Description :</strong> 
+                <strong>Description :</strong>
                 {{ $marque->description }}
             </li>
         </ul>

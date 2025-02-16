@@ -2,40 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 use App\Models\User;
 use App\Models\Product;
 
+
 class PagesController extends Controller
 {
-    function home()
-    {
 
-        return view('tp1/home');
-    }
-    function forum()
-    {
-        return view('tp1/forum');
-    }
 
-    function contact_us()
-    {
-        return view('tp1/contact-us');
-    }
-
-    function abs()
+     // tp1:-----------------------------------------------------------
+    function AfficherUsers()
     {
         //User hiya name dyal Model User li create
         $users = User::all();
-        return view('ex1', compact('users'));
+        return view('tp1/user', compact('users'));
     }
 
-    function affichier($n)
-    {
 
-        $p = Product::where('name', '=', $n)->first();
-        return view('tp3/produit', compact('p', 'n'));
+    // tp2:----------------------------------------------------------------
+    function home()
+    {
+        return view('tp2/home');
+    }
+    function forum()
+    {
+        return view('tp2/forum');
+    }
+    function contact_us()
+    {
+        return view('tp2/contact-us');
+    }
+
+
+
+    // tp3:----------------------------------------------------------------
+    function Rechercher($nom)
+    {
+        $category = Category::where('name', '=', $nom)->first();
+        return view('tp3/category', compact('category', 'nom'));
     }
 
     function liste()
@@ -45,12 +52,12 @@ class PagesController extends Controller
     }
 
 
-    //tp4
+    //tp4:----------------------------------------------------------------
     function formulaire()
     {
-
         return view('tp4/formulaire');
     }
+
     function inserer(Request $re)
     {
         //dd($re->all());
@@ -63,23 +70,16 @@ class PagesController extends Controller
         return redirect('/produit');
     }
 
-
     function modifier($id)
     {
         $p = Product::find($id);
         return view('tp4.edit', compact('p'));
     }
+
     function enregister(Request $r){
         $n=$r->get("nn");
         $prix=$r->get("pp");
         $id=$r->get("ii");
-
-    function enregister(Request $r)
-    {
-        $n = $r->get("nn");
-        $prix = $r->get("pp");
-        $id = $r->get("ii");
-
 
         $product = Product::find($id);
         $product->update([
@@ -91,10 +91,9 @@ class PagesController extends Controller
 
     function delete($id)
     {
-
         $product = Product::find($id);
         $product->delete();
         return redirect('/produit')->with('success', 'le produit <b>' . $product->name . '</b> a ete supprimer ');
     }
 }
-}
+
