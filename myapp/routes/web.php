@@ -54,7 +54,7 @@ Route::get('/contact-us', [PagesController::class, "contact_us"])->name('contact
 
 
 /* -------------------------------------------------------------------------- */
-/*                tp3 -- http://127.0.0.1:8000/category                */
+/*                tp3 -- http://127.0.0.1:8000/category                       */
 /* -------------------------------------------------------------------------- */
 Route::get('/category', [PagesController::class, 'AfficherCategories']);
 Route::get('/category/{nom}', [PagesController::class, "Rechercher"]);
