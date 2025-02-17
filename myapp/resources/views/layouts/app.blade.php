@@ -8,10 +8,10 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-gray-100 flex flex-col min-h-screen">
+<body class="flex flex-col min-h-screen bg-gray-100">
     <!-- Navbar -->
-    <nav class="bg-sky-700 p-4 text-white">
-        <div class="container mx-auto flex justify-between items-center">
+    <nav class="p-4 text-white bg-sky-700">
+        <div class="container flex items-center justify-between mx-auto">
             <a href="{{ route('products.index') }}" class="text-xl font-bold">My App</a>
             <div>
                 <a href="{{ route('products.index') }}" class="px-4 hover:text-gray-400">Products</a>
@@ -21,12 +21,12 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="container mx-auto p-4 flex-1">
+    <main class="container flex-1 p-4 mx-auto">
         @yield('content')
     </main>
 
     <!-- Footer -->
-    <footer class="bg-sky-700 p-4 text-white mt-auto">
+    <footer class="p-4 mt-auto text-white bg-sky-700">
         <div class="container mx-auto text-center">
             &copy; {{ date('Y') }} My App. All rights reserved.
         </div>

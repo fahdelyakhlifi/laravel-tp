@@ -12,8 +12,9 @@ use App\Models\Product;
 class PagesController extends Controller
 {
 
-
-     // tp1:-----------------------------------------------------------
+    /* -------------------------------------------------------------------------- */
+    /*                                     tp1                                    */
+    /* -------------------------------------------------------------------------- */
     function AfficherUsers()
     {
         //User hiya name dyal Model User li create
@@ -22,7 +23,9 @@ class PagesController extends Controller
     }
 
 
-    // tp2:----------------------------------------------------------------
+    /* -------------------------------------------------------------------------- */
+    /*                                     tp2                                    */
+    /* -------------------------------------------------------------------------- */
     function home()
     {
         return view('tp2/home');
@@ -38,21 +41,33 @@ class PagesController extends Controller
 
 
 
-    // tp3:----------------------------------------------------------------
+    /* -------------------------------------------------------------------------- */
+    /*                                     tp3                                    */
+    /* -------------------------------------------------------------------------- */
     function Rechercher($nom)
     {
         $category = Category::where('name', '=', $nom)->first();
-        return view('tp3/category', compact('category', 'nom'));
+        return view('tp3.category', compact('category', 'nom'));
     }
 
+
+    //pour afficher tous les categories disponible de base de donne 
+    function AfficherCategories()
+    {
+        $categories = Category::all(); // Récupère toutes les catégories
+        return view('tp3.category', compact('categories'));
+    }
+
+
+    /* -------------------------------------------------------------------------- */
+    /*                                     tp4                                    */
+    /* -------------------------------------------------------------------------- */
     function liste()
     {
         $produits = Product::all();
         return view('/tp4/liste', compact('produits'));
     }
 
-
-    //tp4:----------------------------------------------------------------
     function formulaire()
     {
         return view('tp4/formulaire');
@@ -76,10 +91,11 @@ class PagesController extends Controller
         return view('tp4.edit', compact('p'));
     }
 
-    function enregister(Request $r){
-        $n=$r->get("nn");
-        $prix=$r->get("pp");
-        $id=$r->get("ii");
+    function enregister(Request $r)
+    {
+        $n = $r->get("nn");
+        $prix = $r->get("pp");
+        $id = $r->get("ii");
 
         $product = Product::find($id);
         $product->update([
@@ -96,4 +112,3 @@ class PagesController extends Controller
         return redirect('/produit')->with('success', 'le produit <b>' . $product->name . '</b> a ete supprimer ');
     }
 }
-
