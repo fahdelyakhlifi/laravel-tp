@@ -1,4 +1,4 @@
-@extends ('layout')
+@extends ('layouts.bootstrap')
 @section('content')
 
 
