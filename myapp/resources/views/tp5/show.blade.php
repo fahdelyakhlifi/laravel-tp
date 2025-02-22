@@ -1,7 +1,7 @@
-@extends ('layout')
+@extends ('layouts.bootstrap')
 @section('content')
 
-<div class="container mt-4 p-4 border rounded shadow bg-light">
+<div class="container p-4 mt-4 border rounded shadow bg-light">
     <h1 class="text-center text-primary">Détails de la Marque</h1>
 
     @if ($marque)
@@ -18,10 +18,10 @@
             </li>
         </ul>
     @else
-        <div class="alert alert-warning text-center">Aucune Marque trouvée</div>
+        <div class="text-center alert alert-warning">Aucune Marque trouvée</div>
     @endif
 
-    <div class="text-center mt-3">
+    <div class="mt-3 text-center">
         <a href="{{ route('marque.index') }}" class="btn btn-secondary">Retour à la liste</a>
     </div>
 </div>

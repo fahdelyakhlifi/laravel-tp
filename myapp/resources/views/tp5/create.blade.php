@@ -1,6 +1,6 @@
-@extends ('layout')
+@extends ('layouts.bootstrap')
 @section('content')
-<form action="/marque" method="post" class="container mt-4 p-4 border rounded shadow bg-light">
+<form action="/marque" method="post" class="container p-4 mt-4 border rounded shadow bg-light">
     @csrf
     <div class="mb-3">
         <label for="nn" class="form-label fw-bold">Nom :</label>
@@ -14,5 +14,3 @@
 
     <button type="submit" class="btn btn-primary w-100">Enregistrer</button>
 </form>
-
-

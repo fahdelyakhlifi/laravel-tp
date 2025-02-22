@@ -1,7 +1,7 @@
-@extends ('layout')
+@extends ('layouts.bootstrap')
 @section('content')
 
-<div class="container mt-4 p-4 border rounded shadow bg-light">
+<div class="container p-4 mt-4 border rounded shadow bg-light">
     <h2 class="text-center text-primary">Modifier la Marque</h2>
 
     <form action="/marque/{{ $marque->id }}" method="post">
@@ -26,4 +26,3 @@
         </div>
     </form>
 </div>
-
