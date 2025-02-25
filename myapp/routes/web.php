@@ -67,6 +67,14 @@ Route::get('/category/{nom}', [PagesController::class, "Rechercher"]);
 Route::middleware(['web'])->group(function () {
   Route::resource('products', ProductController::class);
 });
+
+
+/* -------------------------------------------------------------------------- */
+/*                requête AJAX -- http://127.0.0.1:8000/search                */
+/* -------------------------------------------------------------------------- */
+Route::get('/search', [ProductController::class, 'Ajax'])->name('ajax.list');
+
+
 /*
 Route::get ('/nouveau', [PagesController::class,"formulaire"]);
 Route::post ('/inserer', [PagesController::class,"inserer"]);

@@ -37,11 +37,6 @@ class ProductController extends Controller
             }
         }
 
-
-
-
-
-
         //$products = Product::all();
 
         // en normal avant le filtre et la recherche
@@ -108,4 +103,36 @@ class ProductController extends Controller
 
         return redirect()->route('products.index')->with('success', 'Produit supprimé');
     }
+
+
+    //* Ajax
+    public function Ajax(Request $request)
+    {
+        $search = $request->input('search');
+        $sort = $request->input('sort'); // Ajout du tri
+
+        $query = Product::query();
+
+        if ($search) {
+            $query->where('title', 'like', '%' . $search . '%');
+        }
+
+        // Appliquer le tri si une option est sélectionnée
+        if ($sort) {
+            if ($sort == 'min') {
+                $query->orderBy('price', 'asc');
+            } elseif ($sort == 'max') {
+                $query->orderBy('price', 'desc');
+            }
+        }
+
+        $products = $query->get();
+
+        $html = view('tp4.table', compact('products'))->render();
+
+        return response()->json([
+            'html' => $html,
+        ]);
+    }
+
 }
