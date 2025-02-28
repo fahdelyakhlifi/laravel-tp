@@ -4,8 +4,7 @@ use App\Http\Controllers\MarquesController;
 use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
-
-
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
   return view('welcome');
@@ -89,3 +88,15 @@ Route::get('/delete/{id}', [PagesController::class,"delete"]);
 /*                     tp5 -- http://127.0.0.1:8000/marque                    */
 /* -------------------------------------------------------------------------- */
 Route::resource('marque', MarquesController::class);
+
+
+
+/* -------------------------------------------------------------------------- */
+/*                  tp7 -- http://127.0.0.1:8000/user/create                  */
+/* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*              Tableau de données -- http://127.0.0.1:8000/users             */
+/* -------------------------------------------------------------------------- */
+Route::get('/user/create', [UserController::class, 'create']);
+Route::post('/user/store', [UserController::class, 'store']);
+Route::get('/users', [UserController::class, 'index']);
