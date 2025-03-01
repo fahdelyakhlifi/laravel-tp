@@ -30,7 +30,7 @@
                 <label class="block text-gray-700">Email:</label>
                 <input type="email" name="email" value="{{ old('email') }}"
                     class="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-400">
-                @error('email') <p class="text-sm text-red-500">{{ $message }}</p> @enderror
+                @error('email')              <p class="text-sm text-red-500">{{ $message }}</p> @enderror
             </div>
 
             <div>
@@ -57,7 +57,7 @@
 
 
 
-
+{{-- code sans design --}}
 {{--
 
 <body>

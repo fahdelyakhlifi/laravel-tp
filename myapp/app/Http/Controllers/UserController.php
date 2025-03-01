@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
 use Illuminate\Http\Request;
 use App\Models\Users;
 
@@ -12,6 +13,17 @@ class UserController extends Controller
         return view('tp7.create');
     }
 
+    /* Apres utilisation de StoreUserRequest 'myapp\app\Http\Requests\StoreUserRequest.php' */
+    public function store(StoreUserRequest $request)
+    {
+
+        Users::create($request->validated());
+
+
+        return redirect('/user/create')->with('success', 'Utilisateur créé avec succès!');
+    }
+
+    /* {{     Avant (validation dans le contrôleur et non dans le fichier StoreUserRequest.php)    }}
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -24,6 +36,8 @@ class UserController extends Controller
 
         return redirect('/user/create')->with('success', 'Utilisateur créé avec succès!');
     }
+    */
+
 
     public function index()
     {
