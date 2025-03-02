@@ -7,13 +7,15 @@
         <form action="{{ route('products.store') }}" method="POST"
             class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
             @csrf
-
             <!-- Title Field -->
             <div class="mb-6">
                 <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Titre :</label>
                 <input type="text" name="title" id="title"
                     class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Entrez le titre du produit" required>
+                    @error()
+                        <p style="color: red"> ajouter prix</p>
+                    @enderror
             </div>
 
             <!-- Price Field -->
@@ -22,6 +24,9 @@
                 <input type="number" step="0.01" name="price" id="price"
                     class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Entrez le prix du produit" required>
+                    @error()
+                        <p style="color: red"> ajouter prix</p>
+                    @enderror
             </div>
 
             <!-- Description Field -->

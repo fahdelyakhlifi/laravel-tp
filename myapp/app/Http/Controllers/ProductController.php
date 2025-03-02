@@ -13,22 +13,22 @@ class ProductController extends Controller
     //* Afficher tous les produits
     public function index(Request $request)
     {
-        //*Recuperer la requete de Recherche 
+        //*Recuperer la requete de Recherche
         $search = $request->input('search');
 
-        //*Recuperer l'option de tri par prix 
+        //*Recuperer l'option de tri par prix
         $sort = $request->input('sort');
 
         //*Commencer la requete
         $query = Product::query();
 
-        //La logique de filtre et tri 
+        //La logique de filtre et tri
         // Appliquer la filtre par titre si une recherche est effectuee
         if ($search) {
             $query->where('title', 'like', '%' . $search . '%');
         }
 
-        //Appliquer le tri par prix si une option est selectionne 
+        //Appliquer le tri par prix si une option est selectionne
         if ($sort) {
             if ($sort == 'min') {
                 $query->orderBy('price', 'asc');
@@ -108,4 +108,17 @@ class ProductController extends Controller
 
         return redirect()->route('products.index')->with('success', 'Produit supprimé');
     }
+   /* public function search(Request $req)
+
+
+    {
+        $html = view("tp4.liste" ,compact(''))->render();
+        return response()->json([
+            'status' => true,
+            'html' => $html,
+
+
+        ]);
+
+    }*/
 }

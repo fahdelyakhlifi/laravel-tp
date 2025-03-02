@@ -67,17 +67,22 @@ Route::get('/category/{nom}', [PagesController::class, "Rechercher"]);
 Route::middleware(['web'])->group(function () {
   Route::resource('products', ProductController::class);
 });
-/*
+
 Route::get ('/nouveau', [PagesController::class,"formulaire"]);
 Route::post ('/inserer', [PagesController::class,"inserer"]);
 Route::get('/produit', [PagesController::class,"liste"]);
 Route::get('/modifier/{id}', [PagesController::class,"modifier"]);
 Route::post ('/enregister', [PagesController::class,"enregister"]);
 Route::get('/delete/{id}', [PagesController::class,"delete"]);
-*/
+
+Route::get('/search', [ProductController::class,"search"])->name('SearchAjax');;
 
 
 /* -------------------------------------------------------------------------- */
 /*                     tp5 -- http://127.0.0.1:8000/marque                    */
 /* -------------------------------------------------------------------------- */
 Route::resource('marque', MarquesController::class);
+
+//tp6 -- http://127.0.0.1:8000/
+Route::get ('/formulair', [PagesController::class,"ajouterform"]);
+Route::post ('/enregistre', [PagesController::class,"enregitre"]);

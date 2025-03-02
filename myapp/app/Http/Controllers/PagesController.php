@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ValidationResquest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -51,7 +52,7 @@ class PagesController extends Controller
     }
 
 
-    //pour afficher tous les categories disponible de base de donne 
+    //pour afficher tous les categories disponible de base de donne
     function AfficherCategories()
     {
         $categories = Category::all(); // Récupère toutes les catégories
@@ -97,6 +98,11 @@ class PagesController extends Controller
         $prix = $r->get("pp");
         $id = $r->get("ii");
 
+        //partier validation type input:
+        $r->validate([
+            "nn" => "required",
+            "pp" => "numeric|min:10|max:1500"
+        ]);
         $product = Product::find($id);
         $product->update([
             "name" => $n,
@@ -104,11 +110,26 @@ class PagesController extends Controller
         ]);
         return redirect('/produit')->with('success', 'le produit <b>' . $product->name . '</b> a ete modifier ');
     }
-
     function delete($id)
     {
         $product = Product::find($id);
         $product->delete();
         return redirect('/produit')->with('success', 'le produit <b>' . $product->name . '</b> a ete supprimer ');
     }
+
+
+
+
+    //
+    function ajouterform()
+    {
+        return view('tp6/formulair');
+    }
+
+    function enregitre(ValidationResquest $r)
+    {
+        Category::create($r->validate());
+        return redirect('/formulair');
+
+}
 }
