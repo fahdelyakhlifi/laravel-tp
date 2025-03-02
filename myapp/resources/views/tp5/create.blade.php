@@ -14,3 +14,25 @@
 
     <button type="submit" class="btn btn-primary w-100">Enregistrer</button>
 </form>
+
+
+
+
+{{-- code sans design --}}
+{{-- @extends ('layouts.app')
+@section('content')
+<form action="/marque" method="post">
+    @csrf
+    <div>
+        <label for="nn">Nom :</label>
+        <input type="text" name="nn" id="nn" placeholder="Entrez le nom">
+    </div>
+
+    <div>
+        <label for="desc">Description :</label>
+        <textarea name="desc" id="desc" rows="4" placeholder="Ajoutez une description"></textarea>
+    </div>
+
+    <button type="submit">Enregistrer</button>
+</form>
+@endsection --}}

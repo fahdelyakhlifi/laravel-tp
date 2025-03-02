@@ -55,3 +55,58 @@
         @endif
     </div>
 @endsection
+
+
+{{-- code sans design --}}
+{{-- @extends('layouts.layout')
+
+@section('content')
+<div>
+    <h2>Détails des Catégories</h2>
+
+    @if(isset($category))
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prix</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ $category->id }}</td>
+                <td>{{ $category->name }}</td>
+                <td>{{ $category->prix }} DH</td>
+            </tr>
+        </tbody>
+    </table>
+
+    @elseif(isset($categories) && $categories->count() > 0)
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prix</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($categories as $cat)
+            <tr>
+                <td>{{ $cat->id }}</td>
+                <td>{{ $cat->name }}</td>
+                <td>{{ $cat->prix }} DH</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+    @else
+    <p>
+        Désolé, aucun produit trouvé avec le nom :
+        <strong>{{ $nom ?? 'inconnu' }}</strong>
+    </p>
+    @endif
+</div>
+@endsection --}}

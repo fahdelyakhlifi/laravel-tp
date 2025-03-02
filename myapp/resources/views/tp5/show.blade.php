@@ -25,3 +25,30 @@
         <a href="{{ route('marque.index') }}" class="btn btn-secondary">Retour à la liste</a>
     </div>
 </div>
+
+
+
+
+
+
+{{-- code sans design --}}
+{{-- @extends ('layouts.app')
+@section('content')
+
+<h1>Détails de la Marque</h1>
+
+@if ($marque)
+<ul>
+    <li><strong>ID :</strong> {{ $marque->id }}</li>
+    <li><strong>Nom :</strong> {{ $marque->name }}</li>
+    <li><strong>Description :</strong> {{ $marque->description }}</li>
+</ul>
+@else
+<p>Aucune Marque trouvée</p>
+@endif
+
+<div>
+    <a href="{{ route('marque.index') }}">Retour à la liste</a>
+</div>
+
+@endsection --}}

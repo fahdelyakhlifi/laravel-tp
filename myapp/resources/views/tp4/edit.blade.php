@@ -50,3 +50,51 @@
         </form>
     </div>
 @endsection
+
+
+
+
+
+
+{{-- code sans design --}}
+{{-- @extends('layouts.app')
+
+@section('content')
+<div>
+    <h1>Modifier le Produit : {{ $product->title }}</h1>
+
+    <form action="{{ route('products.update', $product->id) }}" method="POST">
+        @csrf
+        @method('PUT')
+
+        <!-- Champ Titre -->
+        <div>
+            <label for="title">Titre :</label>
+            <input type="text" name="title" id="title" value="{{ $product->title }}" required>
+        </div>
+
+        <!-- Champ Prix -->
+        <div>
+            <label for="price">Prix :</label>
+            <input type="number" step="0.01" name="price" id="price" value="{{ $product->price }}" required>
+        </div>
+
+        <!-- Champ Description -->
+        <div>
+            <label for="description">Description :</label>
+            <textarea name="description" id="description" rows="4">{{ $product->description }}</textarea>
+        </div>
+
+        <!-- Champ Discount -->
+        <div>
+            <label for="discount">Discount :</label>
+            <input type="number" step="0.01" name="discount" id="discount" value="{{ $product->discount }}">
+        </div>
+
+        <!-- Bouton Soumettre -->
+        <div>
+            <button type="submit">Enregistrer les Modifications</button>
+        </div>
+    </form>
+</div>
+@endsection --}}

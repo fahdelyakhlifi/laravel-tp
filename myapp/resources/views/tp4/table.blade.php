@@ -43,3 +43,46 @@
         @endforeach
     </tbody>
 </table>
+
+
+
+
+
+
+
+{{-- code sans design --}}
+{{-- <table id="table-result">
+    <tbody>
+        @foreach ($products as $product)
+        <tr>
+            <td>
+                {{ $product->title }}
+            </td>
+            <td>
+                {{ $product->description }}
+            </td>
+            <td>
+                {{ $product->newPrice }} dh
+                @if ($product->discount > 0)
+                <span>
+                    {{ $product->price }} dh
+                </span>
+                @endif
+            </td>
+            <td>
+                <a href="{{ route('products.edit', $product->id) }}">
+                    Modifier
+                </a>
+                <a href="{{ route('products.show', $product->id) }}">
+                    Détails
+                </a>
+                <form action="{{ route('products.destroy', $product->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+</table> --}}

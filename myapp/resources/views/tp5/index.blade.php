@@ -64,3 +64,62 @@
 
 
 @endsection
+
+
+
+
+
+
+{{-- code sans design --}}
+{{-- @extends ('layouts.app')
+@section('content')
+
+<h1>Liste des Marques</h1>
+
+<!-- Formulaire de recherche -->
+<form action="/marque" method="get">
+    <input type="text" name="search" value="{{ request('search') }}" placeholder="Rechercher une marque...">
+    <button type="submit">Rechercher</button>
+</form>
+
+<!-- Bouton Ajouter une marque -->
+<div>
+    <a href="marque/create">Ajouter une marque</a>
+</div>
+
+<!-- Tableau des marques -->
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($marqs as $m)
+        <tr>
+            <td>{{ $m->id }}</td>
+            <td>{{ $m->name }}</td>
+            <td>{{ $m->description }}</td>
+            <td>
+                <a href="/marque/{{$m->id}}/edit">Modifier</a>
+                <form action="/marque/{{ $m->id }}" method="post" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit"
+                        onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette marque ?');">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
+
+<!-- Pagination -->
+<div>
+    {{$marqs->links()}}
+</div>
+
+@endsection --}}

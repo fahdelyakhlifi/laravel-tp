@@ -20,3 +20,32 @@
         @endif
     </div>
 @endsection
+
+
+
+
+
+
+{{-- code sans design --}}
+{{-- @extends('layouts.app')
+
+@section('content')
+<div>
+    <h1>Détails du Produit</h1>
+
+    @if ($product)
+    <div>
+        <ul>
+            <li><strong>ID :</strong> {{ $product->id }}</li>
+            <li><strong>Nom :</strong> {{ $product->title }}</li>
+            <li><strong>Prix :</strong> {{ $product->price }} dh</li>
+            <li><strong>Description :</strong> {{ $product->description }}</li>
+        </ul>
+    </div>
+    @else
+    <div>
+        <strong>Aucun produit trouvé</strong>
+    </div>
+    @endif
+</div>
+@endsection --}}

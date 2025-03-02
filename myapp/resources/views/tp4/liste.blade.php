@@ -154,3 +154,126 @@
         </div>
     </div>
 @endsection
+
+
+
+
+
+{{-- code sans design --}}
+{{-- @extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <h1>Liste des Produits</h1>
+
+    <!-- Lien pour ajouter un nouveau produit -->
+    <div>
+        <a href="{{ route('products.create') }}">+ Ajouter un produit</a>
+    </div>
+
+    <!-- Formulaire de recherche et tri -->
+    <div>
+        <form action="{{ route('products.index') }}" method="GET">
+            <input type="text" name="search" placeholder="Recherche par produit" value="{{ request('search') }}">
+            <button type="submit">Recherche</button>
+            <button type="button" class="loadData">Load Data</button>
+        </form>
+
+        <form action="{{ route('products.index') }}" method="GET">
+            <select name="sort" onchange="this.form.submit()">
+                <option value="">Trie Par prix</option>
+                <option value="min" {{ request('sort')=='min' ? 'selected' : '' }}>Prix min</option>
+                <option value="max" {{ request('sort')=='max' ? 'selected' : '' }}>Prix max</option>
+            </select>
+        </form>
+    </div>
+
+    <!-- Tableau affichant la liste des produits -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Prix</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($products as $product)
+            <tr>
+                <td>{{ $product->title }}</td>
+                <td>{{ $product->description }}</td>
+                <td>{{ $product->newPrice }} dh
+                    @if ($product->discount > 0)
+                    <span>({{ $product->price }} dh)</span>
+                    @endif
+                </td>
+                <td>
+                    <!-- Lien pour modifier un produit -->
+                    <a href="{{ route('products.edit', $product->id) }}">Modifier</a>
+
+
+                    <!-- Lien pour voir les détails d'un produit -->
+                    <a href="{{ route('products.show', $product->id) }}">Détails</a>
+
+
+                    <!-- Formulaire pour supprimer un produit -->
+                    <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                            onclick="return confirm('Voulez-vous vraiment supprimer ce produit ?')">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+    <!-- Inclusion de jQuery pour la gestion AJAX -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            //* Gestion du bouton "Load Data" via AJAX
+
+            $(".loadData").click(function () {
+                let search = $("input[name='search']").val();
+                let sort = $("select[name='sort']").val();
+                $.ajax({
+
+                    url: "{{ route('ajax.list') }}",
+
+
+
+                    type: "GET",
+
+
+                    data: { search: search, sort: sort },
+
+
+                    success: function (response) {
+                        if (response.html) {
+                            $("tbody").html(response.html);
+                        }
+                    },
+                    error: function () {
+                        alert("Erreur lors du chargement des données.");
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Pagination -->
+    <div>
+        <a href="{{ $products->previousPageUrl() }}">Précédent</a>
+        @for ($i = 1; $i <= $products->lastPage(); $i++)
+            <a href="{{ $products->url($i) }}" {{ $products->currentPage() === $i ? 'style=color:red;' : '' }}>
+                {{ $i }}
+            </a>
+            @endfor
+            <a href="{{ $products->nextPageUrl() }}">Suivant</a>
+    </div>
+</div>
+@endsection --}}
