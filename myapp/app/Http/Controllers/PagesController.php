@@ -19,7 +19,7 @@ class PagesController extends Controller
     {
         //User hiya name dyal Model User li create
         $users = User::all();
-        return view('tp1/user', compact('users'));
+        return view('tp1.user', compact('users'));
     }
 
 
@@ -28,15 +28,15 @@ class PagesController extends Controller
     /* -------------------------------------------------------------------------- */
     function home()
     {
-        return view('tp2/home');
+        return view('tp2.home');
     }
     function forum()
     {
-        return view('tp2/forum');
+        return view('tp2.forum');
     }
     function contact_us()
     {
-        return view('tp2/contact-us');
+        return view('tp2.contact-us');
     }
 
 
@@ -65,12 +65,12 @@ class PagesController extends Controller
     function liste()
     {
         $produits = Product::all();
-        return view('/tp4/liste', compact('produits'));
+        return view('tp4.liste', compact('produits'));
     }
 
     function formulaire()
     {
-        return view('tp4/formulaire');
+        return view('tp4.formulaire');
     }
 
     function inserer(Request $re)

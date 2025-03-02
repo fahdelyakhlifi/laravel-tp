@@ -23,7 +23,7 @@ Route::get('/bonjour/{g}-{nom}', function ($g, $n) {
   else
     $genre = $g;
 
-  return view('tp0/name', compact('genre', 'n'));
+  return view('tp0.name', compact('genre', 'n'));
 });
 
 
@@ -63,16 +63,14 @@ Route::get('/category/{nom}', [PagesController::class, "Rechercher"]);
 /* -------------------------------------------------------------------------- */
 /*                    tp4 -- http://127.0.0.1:8000/products                   */
 /* -------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------- */
+/*             requête AJAX -- http://127.0.0.1:8000/products/ajax            */
+/* -------------------------------------------------------------------------- */
+Route::get('/products/ajax', [ProductController::class, 'Ajax'])->name('ajax.list');
+
 Route::middleware(['web'])->group(function () {
   Route::resource('products', ProductController::class);
 });
-
-
-/* -------------------------------------------------------------------------- */
-/*                requête AJAX -- http://127.0.0.1:8000/search                */
-/* -------------------------------------------------------------------------- */
-Route::get('/search', [ProductController::class, 'Ajax'])->name('ajax.list');
-
 
 /*
 Route::get ('/nouveau', [PagesController::class,"formulaire"]);
@@ -100,3 +98,10 @@ Route::resource('marque', MarquesController::class);
 Route::get('/user/create', [UserController::class, 'create']);
 Route::post('/user/store', [UserController::class, 'store']);
 Route::get('/users', [UserController::class, 'index']);
+
+
+
+
+Route::get('/test-route', function () {
+  dd(route('ajax.list'));
+});
