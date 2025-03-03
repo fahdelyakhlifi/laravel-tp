@@ -22,6 +22,14 @@
 
                 <input type="text" name="search" placeholder="Recherche par produit" class="px-4 py-2 border rounded"
                     value="{{ request('search') }}" style="margin-right: 5px;">
+
+                <input type="number" name="min" placeholder="Rechercher par min" class="px-4 py-2 border rounded"
+                    value="{{ request('min') }}" style="margin-right: 5px;">
+
+                <input type="number" name="max" placeholder="Recherche par max" class="px-4 py-2 border rounded"
+                    value="{{ request('max') }}" style="margin-right: 5px;">
+
+
                 <button type="submit" class="px-4 py-2 text-white rounded bg-sky-700">
                     Recherche
                 </button>
@@ -41,8 +49,30 @@
 
                 </select>
             </form>
+
+            {{-- <p>Nombre de resultats : {{ count($products) }}</p> --}}
+            {{-- pour calculer le total des produits rechercher --}}
+            {{-- <p>Nombre de resultats : {{ $products->total() }}</p> --}}
+
+
+
         </div>
 
+        <!-- Affichage du nombre total de résultats -->
+        <div class="p-4 text-center text-blue-700 bg-blue-100 border border-blue-400 rounded-lg shadow-md">
+            <p class="font-semibold">
+                Nombre de résultats : {{ $products->total() }}
+            </p>
+        </div>
+
+        <!-- message de succès -->
+        @if (session('success'))
+            <div class="p-4 text-red-700 bg-red-100 border border-red-400 rounded-lg">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <br>
         <!-- Tableau des produits -->
         <div class="overflow-hidden bg-white border border-gray-300 rounded-lg shadow-md">
             <table class="w-full border-collapse">
@@ -164,32 +194,40 @@
 
 @section('content')
 <div class="container">
+
+    <!-- Titre de la page -->
     <h1>Liste des Produits</h1>
 
-    <!-- Lien pour ajouter un nouveau produit -->
-    <div>
-        <a href="{{ route('products.create') }}">+ Ajouter un produit</a>
-    </div>
+    <!-- Bouton Ajouter un produit -->
+    <a href="{{ route('products.create') }}">+ Ajouter un produit</a>
 
-    <!-- Formulaire de recherche et tri -->
-    <div>
-        <form action="{{ route('products.index') }}" method="GET">
-            <input type="text" name="search" placeholder="Recherche par produit" value="{{ request('search') }}">
-            <button type="submit">Recherche</button>
-            <button type="button" class="loadData">Load Data</button>
-        </form>
+    <!-- Formulaire de recherche -->
+    <form action="{{ route('products.index') }}" method="GET">
+        <input type="text" name="search" placeholder="Recherche par produit" value="{{ request('search') }}">
+        <input type="number" name="min" placeholder="Prix min" value="{{ request('min') }}">
+        <input type="number" name="max" placeholder="Prix max" value="{{ request('max') }}">
+        <button type="submit">Rechercher</button>
+    </form>
 
-        <form action="{{ route('products.index') }}" method="GET">
-            <select name="sort" onchange="this.form.submit()">
-                <option value="">Trie Par prix</option>
-                <option value="min" {{ request('sort')=='min' ? 'selected' : '' }}>Prix min</option>
-                <option value="max" {{ request('sort')=='max' ? 'selected' : '' }}>Prix max</option>
-            </select>
-        </form>
-    </div>
+    <!-- Sélecteur de tri -->
+    <form action="{{ route('products.index') }}" method="GET">
+        <select name="sort" onchange="this.form.submit()">
+            <option value="">Trie Par prix</option>
+            <option value="min" {{ request('sort')=='min' ? 'selected' : '' }}>Prix min</option>
+            <option value="max" {{ request('sort')=='max' ? 'selected' : '' }}>Prix max</option>
+        </select>
+    </form>
 
-    <!-- Tableau affichant la liste des produits -->
-    <table border="1">
+    <!-- Affichage du nombre total de résultats -->
+    <p>Nombre de résultats : {{ $products->total() }}</p>
+
+    <!-- Message de succès -->
+    @if (session('success'))
+    <p>{{ session('success') }}</p>
+    @endif
+
+    <!-- Tableau des produits -->
+    <table>
         <thead>
             <tr>
                 <th>Titre</th>
@@ -203,26 +241,14 @@
             <tr>
                 <td>{{ $product->title }}</td>
                 <td>{{ $product->description }}</td>
-                <td>{{ $product->newPrice }} dh
-                    @if ($product->discount > 0)
-                    <span>({{ $product->price }} dh)</span>
-                    @endif
-                </td>
+                <td>{{ $product->newPrice }} dh</td>
                 <td>
-                    <!-- Lien pour modifier un produit -->
                     <a href="{{ route('products.edit', $product->id) }}">Modifier</a>
-
-
-                    <!-- Lien pour voir les détails d'un produit -->
                     <a href="{{ route('products.show', $product->id) }}">Détails</a>
-
-
-                    <!-- Formulaire pour supprimer un produit -->
                     <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit"
-                            onclick="return confirm('Voulez-vous vraiment supprimer ce produit ?')">Supprimer</button>
+                        <button type="submit">Supprimer</button>
                     </form>
                 </td>
             </tr>
@@ -230,48 +256,11 @@
         </tbody>
     </table>
 
-    <!-- Inclusion de jQuery pour la gestion AJAX -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-
-            //* Gestion du bouton "Load Data" via AJAX
-
-            $(".loadData").click(function () {
-                let search = $("input[name='search']").val();
-                let sort = $("select[name='sort']").val();
-                $.ajax({
-
-                    url: "{{ route('ajax.list') }}",
-
-
-
-                    type: "GET",
-
-
-                    data: { search: search, sort: sort },
-
-
-                    success: function (response) {
-                        if (response.html) {
-                            $("tbody").html(response.html);
-                        }
-                    },
-                    error: function () {
-                        alert("Erreur lors du chargement des données.");
-                    }
-                });
-            });
-        });
-    </script>
-
     <!-- Pagination -->
     <div>
         <a href="{{ $products->previousPageUrl() }}">Précédent</a>
         @for ($i = 1; $i <= $products->lastPage(); $i++)
-            <a href="{{ $products->url($i) }}" {{ $products->currentPage() === $i ? 'style=color:red;' : '' }}>
-                {{ $i }}
-            </a>
+            <a href="{{ $products->url($i) }}">{{ $i }}</a>
             @endfor
             <a href="{{ $products->nextPageUrl() }}">Suivant</a>
     </div>
