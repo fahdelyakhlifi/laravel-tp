@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MarquesController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\ProductAjaxController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
@@ -66,7 +67,7 @@ Route::get('/category/{nom}', [PagesController::class, "Rechercher"]);
 /* -------------------------------------------------------------------------- */
 /*             requête AJAX -- http://127.0.0.1:8000/products/ajax            */
 /* -------------------------------------------------------------------------- */
-Route::get('/products/ajax', [ProductController::class, 'Ajax'])->name('ajax.list');
+Route::get('/products/ajax', [ProductAjaxController::class, 'searchAndSort'])->name('ajax.list');
 
 Route::middleware(['web'])->group(function () {
   Route::resource('products', ProductController::class);
@@ -101,7 +102,9 @@ Route::get('/users', [UserController::class, 'index']);
 
 
 
-
+/* -------------------------------------------------------------------------- */
+/*           Route pour les test -- http://127.0.0.1:8000/test-route          */
+/* -------------------------------------------------------------------------- */
 Route::get('/test-route', function () {
   dd(route('ajax.list'));
 });
