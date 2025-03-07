@@ -1,0 +1,30 @@
+<?php
+return [
+    /* ----------------------------------- tp8 ---------------------------------- */
+    'title' => 'Ceci est un titre en français.',
+    /* ----------------------------------- tp7 ---------------------------------- */
+    'laptops_list' => 'Liste des ordinateurs portables',
+    'current_language' => 'Langue actuelle',
+    'laptop_id' => 'ID',
+    'laptop_name' => 'Nom de l’ordinateur',
+    'laptop_description' => 'Description de l’ordinateur',
+    'laptop_price' => 'Prix de l’ordinateur',
+    'add_laptop' => 'Ajouter un ordinateur',
+    'actions' => 'Actions',
+    'edit' => 'Modifier',
+    'delete' => 'Supprimer',
+    'details' => 'Details',
+    'laptop_details' => 'Détails de l\'ordinateur portable',
+    'type_price' => 'MAD',
+    'laptop_image_upload' => 'Télécharger une image',
+    'laptop_image_url' => 'URL de l\'image',
+    'laptop_image' => 'Image',
+    'no_laptop_found' => 'Aucun Laptop Trouvé',
+    'back' => 'Retour',
+    'back_to_list' => 'Retour à la liste',
+    'edit_laptop' => 'Modifier un ordinateur portable',
+    'update_laptop' => 'Mettre à jour',
+    'laptop_updated_success' => 'Laptop mis à jour avec succès',
+    'laptop_added_success' => 'Laptop ajouté avec succès',
+    'laptop_deleted_success' => 'Laptop supprimé avec succès',
+];

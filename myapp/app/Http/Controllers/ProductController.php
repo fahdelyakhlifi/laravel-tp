@@ -24,10 +24,10 @@ class ProductController extends Controller
             // Récupérer tous les produits et appliquer les filtres avant paginate()
             $products = Product::where('title', 'like', "%$text%");
 
-            if ($min !== null) {
+            if ($min != null) {
                 $products = $products->where('price', '>=', $min);
             }
-            if ($max !== null) {
+            if ($max != null) {
                 $products = $products->where('price', '<=', $max);
             }
             if ($sort) {

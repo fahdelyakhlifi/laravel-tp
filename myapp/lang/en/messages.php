@@ -1,0 +1,30 @@
+<?php
+return [
+    /* ----------------------------------- tp8 ---------------------------------- */
+    'title' => 'This is an English title.',
+    /* ----------------------------------- tp7 ---------------------------------- */
+    'laptops_list' => 'Laptop List',
+    'current_language' => 'Current Language',
+    'laptop_id' => 'ID',
+    'laptop_name' => 'Laptop Name',
+    'laptop_description' => 'Laptop Description',
+    'laptop_price' => 'Laptop Price',
+    'add_laptop' => 'Add Laptop',
+    'actions' => 'Actions',
+    'edit' => 'Edit',
+    'delete' => 'Delete',
+    'details' => 'Details',
+    'laptop_details' => 'Laptop Details',
+    'type_price' => 'MAD',
+    'laptop_image_upload' => 'Upload Image',
+    'laptop_image_url' => 'Image URL',
+    'laptop_image' => 'Image',
+    'no_laptop_found' => 'No Laptop Found',
+    'back' => 'Back',
+    'back_to_list' => 'Back to List',
+    'edit_laptop' => 'Edit Laptop',
+    'update_laptop' => 'Update',
+    'laptop_updated_success' => 'Laptop updated successfully',
+    'laptop_added_success' => 'Laptop added successfully',
+    'laptop_deleted_success' => 'Laptop deleted successfully',
+];
