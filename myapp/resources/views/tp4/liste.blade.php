@@ -35,7 +35,8 @@
                 </button>
 
                 <!-- Button de search de data ajax  -->
-                <button type="button" class="px-4 py-2 ml-4 text-white rounded loadData bg-sky-400">Load Data</button>
+                <button type="button" class="px-4 py-2 ml-4 text-white rounded loadData bg-sky-400"
+                    onclick="LoadData()">Load Data</button>
             </form>
 
             <!-- Selecteur de tri -->
@@ -65,6 +66,8 @@
             </p>
         </div>
 
+        <br>
+
         <!-- message de succès -->
         @if (session('success'))
             <div class="p-4 text-red-700 bg-red-100 border border-red-400 rounded-lg">
@@ -75,7 +78,7 @@
         <br>
         <!-- Tableau des produits -->
         <div class="overflow-hidden bg-white border border-gray-300 rounded-lg shadow-md">
-            <table class="w-full border-collapse">
+            <table class="w-full border-collapse" id="table-result">
                 <thead class="text-gray-800 bg-gray-200">
                     <tr>
                         <th class="px-4 py-3 text-center">Titre</th>
@@ -135,34 +138,45 @@
         <!-- Script Ajax -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
+            function LoadData() {
+                console.log("Bouton cliqué !");
+                $.ajax({
+
+
+                    url: "{{ route('ajax.list') }}", // Assurez-vous que cette route est correcte
+
+
+
+                    type: "GET",
+
+
+
+                    data: {
+                        search: $("input[name='search']").val(),
+                        min: $("input[name='min']").val(),
+                        max: $("input[name='max']").val(),
+                        sort: $("select[name='sort']").val()
+                    },
+
+
+
+                    success: function (result) {
+                        console.log("Données chargées avec succès", result);
+                        $("#table-result tbody").html(result.html);     // Mettre à jour uniquement le tbody
+                    },
+
+
+
+                    error: function (result) {
+                        console.error("Erreur lors du chargement des données", result);
+                    }
+                });
+            }
+
+            // Appeler LoadData() lors du clic sur un bouton
             $(document).ready(function () {
-                $(".loadData").click(function () {
-                    let search = $("input[name='search']").val();
-                    let sort = $("select[name='sort']").val();
-
-                    console.log("Bouton cliqué !");
-                    $.ajax({
-
-                        url: "{{ route('ajax.list') }}",
-
-
-                        type: "GET",
-
-
-                        data: { search: search, sort: sort },
-
-
-                        success: function (response) {
-                            if (response.html) {
-                                $("tbody").html(response.html);
-                            }
-                        },
-
-
-                        error: function (xhr) {
-                            console.error("Erreur lors du chargement des données", xhr);
-                        }
-                    });
+                $(".loadData").on("click", function () {
+                    LoadData();
                 });
             });
         </script>

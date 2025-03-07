@@ -1,4 +1,4 @@
-<table class="w-full border-collapse" id="table-result">
+<div>
     <tbody class="divide-y divide-gray-300">
         @foreach ($products as $product)
             <tr class="hover:bg-gray-100">
@@ -42,7 +42,8 @@
             </tr>
         @endforeach
     </tbody>
-</table>
+</div>
+
 
 
 

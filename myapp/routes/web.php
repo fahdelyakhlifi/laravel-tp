@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\LangController;
+use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\LaptopsController;
+use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\MarquesController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProductAjaxController;
@@ -91,7 +95,7 @@ Route::resource('marque', MarquesController::class);
 
 
 /* -------------------------------------------------------------------------- */
-/*                  tp7 -- http://127.0.0.1:8000/user/create                  */
+/*                  tp6 -- http://127.0.0.1:8000/user/create                  */
 /* -------------------------------------------------------------------------- */
 /* -------------------------------------------------------------------------- */
 /*              Tableau de données -- http://127.0.0.1:8000/users             */
@@ -103,8 +107,47 @@ Route::get('/users', [UserController::class, 'index']);
 
 
 /* -------------------------------------------------------------------------- */
+/*                    tp7 -- http://127.0.0.1:8000/laptops                    */
+/* -------------------------------------------------------------------------- */
+/* Route::get('/change-language', function () {
+  $lang = request('lang');
+  session()->put('locale', $lang);
+  return redirect()->back();
+});*/
+
+
+Route::get('/change-language', [LocaleController::class, 'Locale'])->name('change-language');
+
+Route::resource('laptops', LaptopsController::class);
+
+/*
+ - Route pour afficher la liste des laptops
+ Route::get('/laptops', [LaptopsController::class, 'index'])->name('tp7.index');
+
+ - Route pour ajouter un laptop
+ Route::post('/laptops/store', [LaptopsController::class, 'store'])->name('laptops.store');
+*/
+
+
+/* -------------------------------------------------------------------------- */
+/*                     tp8 -- http://127.0.0.1:8000/locale                    */
+/* -------------------------------------------------------------------------- */
+Route::get('/locale', function () {
+  return view('tp8.locale');
+});
+
+Route::get('/locale/{lang}', [LocaleController::class, 'setLocale']);
+
+
+/* -------------------------------------------------------------------------- */
 /*           Route pour les test -- http://127.0.0.1:8000/test-route          */
 /* -------------------------------------------------------------------------- */
 Route::get('/test-route', function () {
   dd(route('ajax.list'));
 });
+
+Route::get('/test-session', function () {
+  return session()->all();
+});
+
+/* -------------------------------------------------------------------------- */
