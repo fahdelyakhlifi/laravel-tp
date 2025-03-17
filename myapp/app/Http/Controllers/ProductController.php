@@ -6,7 +6,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ProductRequest;
-
+use App\Models\Marque;
 
 class ProductController extends Controller
 {
@@ -24,10 +24,10 @@ class ProductController extends Controller
             // Récupérer tous les produits et appliquer les filtres avant paginate()
             $products = Product::where('title', 'like', "%$text%");
 
-            if ($min != null) {
+            if ($min) {
                 $products = $products->where('price', '>=', $min);
             }
-            if ($max != null) {
+            if ($max) {
                 $products = $products->where('price', '<=', $max);
             }
             if ($sort) {
@@ -127,4 +127,19 @@ class ProductController extends Controller
 
         return redirect()->route('products.index')->with('success', 'Produit supprimé');
     }
+
+    // Afficher tous les produits d'une marque spécifique (ex: Nike - ID 1)
+    public function productsByMarque($id)
+    {
+        $marque = Marque::find($id);
+
+        if (!$marque) {
+            return redirect()->route('marque.index')->with('error', 'Marque non trouvée.');
+        }
+
+        $products = $marque->products()->paginate(10);
+
+        return view('tp5.marque', compact('products', 'marque'));
+    }
+
 }

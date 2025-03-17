@@ -15,7 +15,27 @@ class LaptopsController extends Controller
     {
         // $laptops = Laptops::all();
 
-        $laptops = Laptops::orderBy('id', 'asc')->get();
+        // $laptops = Laptops::orderBy('id', 'asc')->get();
+
+        $search = request()->input('search');
+        $min = request()->input('min');
+        $max = request()->input('max');
+
+        if ($search || $min || $max) {
+            $laptops = Laptops::where('name', 'like', "%$search%");
+
+            if ($min != null) {
+                $laptops = $laptops->where('price', '>=', $min);
+            }
+            if ($max != null) {
+                $laptops = $laptops->where('price', '<=', $max);
+            }
+
+            $laptops = $laptops->paginate(10);
+        } else {
+            $laptops = Laptops::paginate(10);
+        }
+
         return view('tp7.index', compact('laptops'));
     }
 
@@ -38,7 +58,7 @@ class LaptopsController extends Controller
             'price' => 'required|numeric|min:1',
             'description' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validation pour l'image téléchargée
-            'image_url' => 'nullable|url',                  // Validation pour l'URL de l'image
+            'image_url' => 'nullable|url',                                   // Validation pour l'URL de l'image
         ]);
 
         $imagePath = null;
@@ -54,7 +74,7 @@ class LaptopsController extends Controller
             'name' => $request->name,
             'price' => $request->price,
             'description' => $request->description,
-            'image' => $imagePath,                         // Sauvegarder le chemin local de l'image
+            'image' => $imagePath,                                           // Sauvegarder le chemin local de l'image
         ]);
 
         /*
@@ -106,7 +126,7 @@ class LaptopsController extends Controller
             'price' => 'required|numeric|min:1',
             'description' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validation pour l'image téléchargée
-            'image_url' => 'nullable|url',                  // Validation pour l'URL de l'image
+            'image_url' => 'nullable|url',                                   // Validation pour l'URL de l'image
         ]);
 
 
@@ -133,7 +153,7 @@ class LaptopsController extends Controller
             'name' => $request->name,
             'price' => $request->price,
             'description' => $request->description,
-            'image' => $imagePath,                         // Sauvegarder le chemin local de l'image
+            'image' => $imagePath,                           // Sauvegarder le chemin local de l'image
         ]);
 
         return redirect()->route('laptops.edit', $laptops->id)->with('success', __('messages.laptop_updated_success'));
@@ -145,7 +165,7 @@ class LaptopsController extends Controller
     public function destroy(string $id)
     {
         /*
-            - Supprimer le laptop
+            Supprimer le laptop
             Laptops::destroy($id);
         */
 

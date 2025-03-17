@@ -1,15 +1,16 @@
 <?php
 
-use App\Http\Controllers\LangController;
-use App\Http\Controllers\LanguageController;
+
 use App\Http\Controllers\LaptopsController;
-use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\MarquesController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProductAjaxController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\LocalizationMiddleware;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {
   return view('welcome');
@@ -74,7 +75,17 @@ Route::get('/category/{nom}', [PagesController::class, "Rechercher"]);
 Route::get('/products/ajax', [ProductAjaxController::class, 'searchAndSort'])->name('ajax.list');
 
 Route::middleware(['web'])->group(function () {
+
+  /* -------------------- tous les produits correspondants -------------------- */
   Route::resource('products', ProductController::class);
+
+
+  /* -------------------------------------------------------------------------- */
+  /*                    Lier et afficher produits par marque                    */
+  /*                   http://127.0.0.1:8000/products/marque/1                  */
+  /* -------------------------------------------------------------------------- */
+  Route::get('/products/marque/{id}', [ProductController::class, 'productsByMarque'])->name('products.byMarque');
+
 });
 
 /*
@@ -106,37 +117,57 @@ Route::get('/users', [UserController::class, 'index']);
 
 
 
-/* -------------------------------------------------------------------------- */
-/*                    tp7 -- http://127.0.0.1:8000/laptops                    */
-/* -------------------------------------------------------------------------- */
-/* Route::get('/change-language', function () {
-  $lang = request('lang');
-  session()->put('locale', $lang);
-  return redirect()->back();
-});*/
-
-
-Route::get('/change-language', [LocaleController::class, 'Locale'])->name('change-language');
-
-Route::resource('laptops', LaptopsController::class);
-
 /*
- - Route pour afficher la liste des laptops
- Route::get('/laptops', [LaptopsController::class, 'index'])->name('tp7.index');
+ * ----------------------- groupe des routes middleware ---------------------- */
 
- - Route pour ajouter un laptop
- Route::post('/laptops/store', [LaptopsController::class, 'store'])->name('laptops.store');
-*/
+Route::middleware(LocalizationMiddleware::class)->group(function () {
+
+  /* -------------------------------------------------------------------------- */
+  /*                    tp7 -- http://127.0.0.1:8000/laptops                    */
+  /* -------------------------------------------------------------------------- */
+  Route::resource('laptops', LaptopsController::class);
 
 
-/* -------------------------------------------------------------------------- */
-/*                     tp8 -- http://127.0.0.1:8000/locale                    */
-/* -------------------------------------------------------------------------- */
-Route::get('/locale', function () {
-  return view('tp8.locale');
+  /* -------------------------------------------------------------------------- */
+  /*                     tp8 -- http://127.0.0.1:8000/test_langue               */
+  /* -------------------------------------------------------------------------- */
+
+  Route::get('/test_langue', function () {
+    // App::setLocale('fr'); 
+    return view('tp8.locale');
+  });
+
 });
 
-Route::get('/locale/{lang}', [LocaleController::class, 'setLocale']);
+/*
+ * -------------------------------------------------------------------------- */
+
+
+
+/* -------------------------------------------------------------------------- */
+/*          Gestion de la langue -- Stocke la langue dans la session          */
+/* -------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------- */
+/*                   Route pour changer la langue via l'URL                   */
+/*                    (ex: http://127.0.0.1:8000/locale/en)                   */
+/* -------------------------------------------------------------------------- */
+Route::get('/locale/{lang}', function ($lang) {
+  session(['lang' => $lang]);
+  return redirect()->back();
+});
+
+/* -------------------------------------------------------------------------- */
+/*               Route pour changer la langue via un formulaire               */
+/*                 (ex: http://127.0.0.1:8000/locale?lang=fr)                 */
+/* -------------------------------------------------------------------------- */
+
+Route::get('/locale', function (Request $request) {
+  $lang = $request->query('lang');
+  session(['lang' => $lang]);
+  return redirect()->back();
+});
+
 
 
 /* -------------------------------------------------------------------------- */

@@ -49,6 +49,9 @@
                                         <i class="fas fa-trash"></i> Supprimer
                                     </button>
                                 </form>
+                                <a href="{{ url('/products/marque/' . $m->id) }}" class="btn btn-info btn-sm">
+                                    <i class="fas fa-list"></i> Voir Produits
+                                </a>
                             </td>
                         </tr>
                     @endforeach

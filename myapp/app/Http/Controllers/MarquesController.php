@@ -20,9 +20,6 @@ class MarquesController extends Controller
         }
         //$marqs = Marque::orderBy('id', 'asc')->paginate(20); // Tri par ID croissant
         return view("tp5.index", compact('marqs'));
-
-
-
     }
 
     /**

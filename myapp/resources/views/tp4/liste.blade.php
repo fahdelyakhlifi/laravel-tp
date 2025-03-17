@@ -84,6 +84,7 @@
                         <th class="px-4 py-3 text-center">Titre</th>
                         <th class="px-4 py-3 text-center">Description</th>
                         <th class="px-4 py-3 text-center">Prix</th>
+                        <th class="px-4 py-3 text-center">Marque</th>
                         <th class="px-4 py-3 text-center">Actions</th>
                     </tr>
                 </thead>
@@ -107,6 +108,10 @@
                                         {{ $product->price }} dh
                                     </span>
                                 @endif
+                            </td>
+
+                            <td class="px-4 py-3 text-center text-gray-700">
+                                {{ $product->marque ? $product->marque->name : 'Aucune marque' }}
                             </td>
 
                             <td class="px-4 py-3 space-x-2 text-center">

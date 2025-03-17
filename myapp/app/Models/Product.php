@@ -9,7 +9,12 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'price', 'description', 'discount'];
+    protected $fillable = ['title', 'price', 'description', 'discount', 'marque_id'];
+
+    public function marque()
+    {
+        return $this->belongsTo(Marque::class, 'marque_id');
+    }
 
     // Calcul du prix après réduction
     public function getNewPriceAttribute()

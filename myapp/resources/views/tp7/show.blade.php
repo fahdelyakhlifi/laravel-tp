@@ -4,55 +4,67 @@
 
 @section('content')
     <div class="container px-4 py-8 mx-auto">
-        <h1 class="mb-6 text-3xl font-bold text-center">@lang('messages.laptop_details')</h1>
+        <h1 class="mb-6 text-3xl font-bold text-center text-gray-800">@lang('messages.laptop_details')</h1>
 
         @if ($laptops)
-            <div class="max-w-lg p-6 mx-auto bg-white rounded-lg shadow-md">
-                <ul>
-                    <li class="mb-2"><strong>@lang('messages.laptop_id') :</strong> {{ $laptops->id }}</li>
-                    <li class="mb-2"><strong>@lang('messages.laptop_name') :</strong> {{ $laptops->name }}</li>
-                    <li class="mb-2"><strong>@lang('messages.laptop_description') :</strong> {{ $laptops->description }}</li>
-                    <li class="mb-2"><strong>@lang('messages.laptop_price') :</strong> {{ $laptops->price }}
-                        @lang('messages.type_price')
+            <div class="max-w-lg p-6 mx-auto bg-white rounded-lg shadow-lg">
+                <ul class="space-y-4">
+                    <li>
+                        <strong class="text-gray-700">@lang('messages.laptop_id') :</strong>
+                        <span class="text-gray-600">{{ $laptops->id }}</span>
                     </li>
-                    <li class="mb-2"><strong>@lang('messages.laptop_image') :</strong>
-
-                        @if($laptops->image)
-                            @if(filter_var($laptops->image, FILTER_VALIDATE_URL))
-                                <img src="{{ $laptops->image }}" alt="{{ $laptops->name }}"
-                                    class="object-cover w-32 h-24 transition-shadow duration-300 border border-gray-200 rounded-lg shadow-md hover:shadow-lg">
+                    <li>
+                        <strong class="text-gray-700">@lang('messages.laptop_name') :</strong>
+                        <span class="text-gray-600">{{ $laptops->name }}</span>
+                    </li>
+                    <li>
+                        <strong class="text-gray-700">@lang('messages.laptop_description') :</strong>
+                        <span class="text-gray-600">{{ $laptops->description }}</span>
+                    </li>
+                    <li>
+                        <strong class="text-gray-700">@lang('messages.laptop_price') :</strong>
+                        <span class="text-gray-600">{{ $laptops->price }} @lang('messages.type_price')</span>
+                    </li>
+                    <li>
+                        <strong class="text-gray-700">@lang('messages.laptop_image') :</strong>
+                        <div class="mt-2">
+                            @if($laptops->image)
+                                @if(filter_var($laptops->image, FILTER_VALIDATE_URL))
+                                    <img src="{{ $laptops->image }}" alt="{{ $laptops->name }}"
+                                        class="object-cover w-32 h-24 transition-shadow duration-300 border border-gray-200 rounded-lg shadow-md hover:shadow-lg">
+                                @else
+                                    <img src="{{ asset('storage/' . $laptops->image) }}" alt="{{ $laptops->name }}"
+                                        class="object-cover w-32 h-24 transition-shadow duration-300 border border-gray-200 rounded-lg shadow-md hover:shadow-lg">
+                                @endif
                             @else
-                                <img src="{{ asset('storage/' . $laptops->image) }}" alt="{{ $laptops->name }}"
-                                    class="object-cover w-32 h-24 transition-shadow duration-300 border border-gray-200 rounded-lg shadow-md hover:shadow-lg">
+                                <span class="text-gray-500">@lang('messages.no_image')</span>
                             @endif
-                        @else
-                            <span>No Image</span>
-                        @endif
+                        </div>
                     </li>
                 </ul>
 
-                {{-- button de retour --}}
-                <div class="flex justify-between mb-4">
-                    <a href="{{ route('laptops.index') }}" class="px-4 py-2 text-white bg-gray-500 rounded hover:bg-gray-600">
+                {{-- Bouton de retour --}}
+                <div class="flex justify-center mt-6">
+                    <a href="{{ route('laptops.index') }}"
+                        class="px-4 py-2 text-white no-underline transition duration-300 ease-in-out bg-gray-500 rounded hover:bg-gray-600">
                         <i class="mr-2 fas fa-arrow-left"></i> @lang('messages.back_to_list')
                     </a>
                 </div>
             </div>
-
-
         @else
-            <div class="relative max-w-lg px-4 py-3 mx-auto text-red-700 bg-red-100 border border-red-400 rounded" role="alert">
-                <strong>@lang('messages.no_laptop_found')</strong>
+            {{-- Message d'erreur si aucun ordinateur portable n'est trouvé --}}
+            <div class="max-w-lg p-6 mx-auto bg-red-100 border border-red-400 rounded-lg">
+                <strong class="text-red-700">@lang('messages.no_laptop_found')</strong>
             </div>
 
-            {{-- button de retour --}}
-            <div class="flex justify-between mb-4">
-                <a href="{{ route('laptops.index') }}" class="px-4 py-2 text-white bg-gray-500 rounded hover:bg-gray-600">
+            {{-- Bouton de retour --}}
+            <div class="flex justify-center mt-6">
+                <a href="{{ route('laptops.index') }}"
+                    class="px-4 py-2 text-white no-underline transition duration-300 bg-gray-500 rounded hover:bg-gray-600">
                     <i class="mr-2 fas fa-arrow-left"></i> @lang('messages.back_to_list')
                 </a>
             </div>
         @endif
-
     </div>
 @endsection
 
