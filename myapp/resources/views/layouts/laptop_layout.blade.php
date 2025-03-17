@@ -7,61 +7,71 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/6.6.6/css/flag-icons.min.css" rel="stylesheet">
-    <title>@yield('title')</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<title>@yield('title')</title>
 
-    <style>
-        /* Styles pour les drapeaux */
-        .fi {
-            width: 24px;
-            height: 18px;
-            margin-right: 8px;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+<style>
+    /* Styles pour les drapeaux */
+    .fi {
+        width: 24px;
+        height: 18px;
+        margin-right: 8px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-        /* Ajustement pour RTL */
-        [dir="rtl"] .fi {
-            margin-right: 0;
-            margin-left: 8px;
-        }
+    /* Ajustement pour RTL */
+    [dir="rtl"] .fi {
+        margin-right: 0;
+        margin-left: 8px;
+    }
 
-        /* Styles spécifiques pour RTL */
-        [dir="rtl"] .text-start {
-            text-align: right;
-        }
+    /* Styles spécifiques pour RTL */
+    [dir="rtl"] .text-start {
+        text-align: right;
+    }
 
-        [dir="rtl"] .flex-row-reverse {
-            flex-direction: row-reverse;
-        }
+    [dir="rtl"] .flex-row-reverse {
+        flex-direction: row-reverse;
+    }
 
-        [dir="rtl"] .ml-2 {
-            margin-left: 0;
-            margin-right: 0.5rem;
-        }
+    [dir="rtl"] .ml-2 {
+        margin-left: 0;
+        margin-right: 0.5rem;
+    }
 
-        [dir="rtl"] .mr-2 {
-            margin-right: 0;
-            margin-left: 0.5rem;
-        }
+    [dir="rtl"] .mr-2 {
+        margin-right: 0;
+        margin-left: 0.5rem;
+    }
 
-        /* Styles spécifiques pour LTR */
-        [dir="ltr"] .text-start {
-            text-align: left;
-        }
+    /* Styles spécifiques pour LTR */
+    [dir="ltr"] .text-start {
+        text-align: left;
+    }
 
-        [dir="ltr"] .flex-row {
-            flex-direction: row;
-        }
-    </style>
+    [dir="ltr"] .flex-row {
+        flex-direction: row;
+    }
+</style>
 </head>
 
 <body class="text-gray-800 bg-gray-100">
     <div class="container p-4 mx-auto">
         <p class="mb-4 text-sm">@lang('messages.current_language'): {{ app()->getLocale() }}</p>
 
+        <div class="mt-3">
+            <a href="{{ url('locale/fr') }}" class="m-2 btn btn-secondary">🇫🇷 Français</a>
+            <a href="{{ url('locale/en') }}" class="m-2 btn btn-primary">🇬🇧 English</a>
+            <a href="{{ url('locale/ar') }}" class="m-2 btn btn-success">🇸🇦 العربية</a>
+        </div>
+
+        <br />
+
         <!-- Sélecteur de langue personnalisé avec icônes de drapeaux -->
-        <form action="{{ url('change-language') }}" method="GET" class="mb-6">
+        <form action="{{ url('/locale') }}" method="GET" class="mb-6">
             <div
                 class="flex space-x-4 {{ app()->getLocale() == 'ar' ? 'flex-row-reverse' : 'flex-row' }} {{ app()->getLocale() == 'ar' ? 'justify-end' : 'justify-start' }}">
                 <!-- Option Français -->

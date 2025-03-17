@@ -4,6 +4,10 @@
     <div class="max-w-4xl p-6 mx-auto mt-6 bg-white rounded-lg shadow-lg">
         <h2 class="mb-4 text-2xl font-bold text-center text-gray-900">Détails des Catégories</h2>
 
+        <p>Test language @lang('messages.add_laptop')</p>
+        <a href="{{ url('locale/ar')}}">Arabe</a>
+
+
 
         {{-- * isset() vérifie si une variable existe et n'est pas null,
         * évitant ainsi les erreurs d'accès à des variables non définies --}}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -14,7 +14,7 @@
 
         <div class="mt-3">
             <a href="{{ url('locale/en') }}" class="btn btn-primary">🇬🇧 English</a>
-            <a href="{{ url('locale/fr') }}" class="btn btn-secondary">🇫🇷 Français</a>
+            <a href="locale/fr" class="btn btn-secondary">🇫🇷 Français</a>
             <a href="{{ url('locale/ar') }}" class="btn btn-success">🇸🇦 العربية</a>
         </div>
     </div>

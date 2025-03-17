@@ -75,7 +75,8 @@
             </button>
 
             {{-- button de retour --}}
-            <a href="{{ route('laptops.index') }}" class="px-4 py-2 text-white bg-gray-500 rounded hover:bg-gray-600">
+            <a href="{{ route('laptops.index') }}"
+                class="px-4 py-2 text-white no-underline bg-gray-500 rounded hover:bg-gray-600">
                 <i class="mr-2 fas fa-arrow-left"></i> @lang('messages.back_to_list')
             </a>
 

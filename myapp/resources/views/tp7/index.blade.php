@@ -4,7 +4,7 @@
 @section('title', __('messages.laptops_list'))
 
 @section('content')
-    <h1 class="mb-6 text-3xl font-bold text-start">@lang('messages.laptops_list')</h1>
+    <h1 class="mb-6 text-4xl font-bold text-center">@lang('messages.laptops_list')</h1>
 
 
     {{-- Afficher le message de succès --}}
@@ -14,15 +14,41 @@
         </div>
     @endif
 
-
     <!-- Lien vers le formulaire de création -->
-    <a href="{{ route('laptops.create') }}" class="px-4 py-2 mb-4 text-white bg-blue-500 rounded hover:bg-blue-600">
+    <a href="{{ route('laptops.create') }}"
+        class="px-4 py-2 mb-4 text-white no-underline transition duration-300 ease-in-out bg-blue-500 rounded hover:bg-blue-600">
         <i class="mr-2 fas fa-plus-circle"></i> @lang('messages.add_laptop')
     </a>
 
     <br />
     <br />
 
+    <div class="flex items-center justify-between mb-6">
+        <!-- Barre de Recherche -->
+        <form action="{{ route('laptops.index') }}" method="GET" class="flex items-center" style="margin-right: 16px;">
+
+            <input type="text" name="search" placeholder="Recherche par name" class="px-4 py-2 border rounded"
+                value="{{ request('search') }}" style="margin-right: 5px;">
+
+            <input type="number" name="min" placeholder="Rechercher par min" class="px-4 py-2 border rounded"
+                value="{{ request('min') }}" style="margin-right: 5px;">
+
+            <input type="number" name="max" placeholder="Recherche par max" class="px-4 py-2 border rounded"
+                value="{{ request('max') }}" style="margin-right: 5px;">
+
+
+            <button type="submit"
+                class="flex items-center justify-center p-2 text-white transition duration-300 bg-blue-300 rounded hover:bg-blue-400">
+                <i class="fas fa-search"></i> Rechercher
+            </button>
+        </form>
+
+    </div>
+
+
+
+    <br />
+    <br />
     <!-- Liste des laptops -->
     <div class="p-6 bg-white rounded-lg shadow-md">
         <table class="min-w-full">
@@ -81,12 +107,14 @@
 
 
                                 {{-- Bouton de modification --}}
-                                <a href="{{ route('laptops.edit', $laptop->id) }}" class="text-blue-500 hover:text-blue-700">
+                                <a href="{{ route('laptops.edit', $laptop->id) }}"
+                                    class="text-blue-500 no-underline hover:text-blue-700">
                                     <i class="fas fa-edit"></i> @lang('messages.edit')
                                 </a>
 
                                 {{-- Bouton de détails --}}
-                                <a href="{{ route('laptops.show', $laptop->id) }}" class="text-green-500 hover:text-green-700">
+                                <a href="{{ route('laptops.show', $laptop->id) }}"
+                                    class="text-green-500 no-underline hover:text-green-700">
                                     <i class="fas fa-eye"></i> @lang('messages.details')
                                 </a>
 
